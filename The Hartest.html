@@ -1,0 +1,1168 @@
+<HTML>
+    <HEAD>
+        <TITLE>
+            Twitter Inc. - Peepol
+        </TITLE>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <link rel="icon" 
+      type="image/png" 
+      href="peepol_favicon.png">
+      <script type="text/javascript"
+    src="../hosted/scripts/jquery.min.js"></script>
+<script type="text/javascript"
+    src="../hosted/scripts/jquery-ui.min.js"></script>
+<script src="../hosted/scripts/shortcuts.js"></script>  
+<link rel="stylesheet" type="text/css"
+    href="../hosted/stylesheets/jquery-ui.css"/>
+<script src="../hosted/scripts/SmoothScroll.js"></script>
+    </HEAD>
+    <script>
+
+$(function () {
+        $(".pplWidget").draggable({
+                snap: ".gridCell",
+                snapMode: "inner",
+                containment:"#WidgetPlayGround"
+        });
+});
+    </script>
+    <style>
+        @font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Open Sans Light'), local('OpenSans-Light'), url(http://themes.googleusercontent.com/static/fonts/opensans/v8/DXI1ORHCpsQm3Vp6mXoaTXhCUOGz7vYGh680lGh-uXM.woff) format('woff');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans'), local('OpenSans'), url(http://themes.googleusercontent.com/static/fonts/opensans/v8/cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
+}
+@font-face{
+    font-family:'Entypo';
+    font-style:normal;
+    font-weight:400;
+    src: local('Entypo'), url(entypo.woff) format('woff');
+}
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Roboto Light'), local('Roboto-Light'), url(http://themes.googleusercontent.com/static/fonts/roboto/v11/Hgo13k-tfSpn0qi1SFdUfT8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
+}
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto Regular'), local('Roboto-Regular'), url(http://themes.googleusercontent.com/static/fonts/roboto/v11/2UX7WLTfW3W8TclTUvlFyQ.woff) format('woff');
+}
+
+        body
+        {
+            background:gainsboro;
+            margin:0px;
+            overflow:auto;
+            font-family:sans-serif;
+            overflow-X:hidden;
+        }
+        #background_cover
+        {
+            min-height:60px;
+            max-height:100%;
+            position:fixed;
+            background-image:url("background.jpg");
+            background-size:cover;
+            background-repeat:no-repeat;
+            background-position:50%;
+            background-blend-mode:overlay;
+            -webkit-transition:none;
+            transition:none;
+            width:100%;
+            height:100%;
+            top:0px;
+            left:0px;
+            z-index:+25;
+            box-shadow:0px 3px 6px 0px rgba(0,0,0,0.2),0px -65px 40px -60px rgba(0,0,0,0.65) inset,0px -120px 60px -60px rgba(0,0,0,0.58) inset;
+        }
+        .stop_scroll
+        {
+            height:100%;
+            overflow:hidden;
+        }
+        #sidebar
+        {
+            height:100%;
+            width:750px;
+            position:fixed;
+            left:-750px;
+            top:0px;
+            background:#fff;
+            box-shadow:3px 0px 6px 0px rgba(0,0,0,0.2);
+            -webkit-transition:all 0.5s;
+            transition:all 0.5s;
+            -moz-transition:all 0.5s;
+            z-index:+24;
+        }
+        #searchToggle
+        {
+            position:absolute;
+            top:0px;
+            right:0px;
+            width:60px;
+            height:60px;
+            background:transparent;
+            line-height:35px;
+            font-size:35pt;
+        }
+        div.raised
+        {
+            background:transparent;
+            box-shadow:none;
+            border-radius:100px;
+            color:white;
+            position:absolute;
+            font-size:45pt;
+            cursor:pointer;
+        }
+        
+        #upperBar
+        {   
+            bottom:0px;
+            left:0px;
+            position:absolute;
+            width:100%;
+            height:60px;
+            z-index:+25;
+        }
+        #menuToggle
+        {
+            width:100px;
+            height:100px;
+            left:-100px;
+            top:50%;
+            margin-top:-50px;
+            line-height:1.17;
+        }
+        div.raised:active
+        {
+            box-shadow:0px 0px 0px 60px rgba(255,255,255,0.1) inset;
+            opacity:0.1;
+        }
+        *
+        {
+            -webkit-user-select:none;
+            -moz-user-select:none;
+            -ms-user-select:none;
+            user-select:none;
+            -webkit-transition:all 0.5s;
+            transition:all 0.5s;
+            -moz-transition:all 0.5s;
+            -webkit-font-smoothing:antialiased;
+            outline:none;
+            border:none;
+        }
+        #Headline
+        {
+            font-family:"open sans",serif;
+            font-weight:300;
+            font-size:20pt;
+            color:#fff;
+            margin-left:20px;
+            line-height:60px;
+            cursor:default;
+        }
+        
+        
+        .nav
+        {
+            margin-top:20px;
+            list-style-type:none;
+            padding:0px;
+            margin-left:10px;
+            font-size:11pt;
+            font-family:sans-serif;
+            color:#777;
+            position:absolute;
+        }
+        .nav li
+        {
+            width:230px;
+            float:bottom;
+            height:44px;
+            line-height:44px;
+            margin-top:0px;
+            padding:0px 15px;
+            padding-right:0px;
+            -webkit-transition:all 0.2s;
+            transition:all 0.2s;
+            -moz-transition:all 0.2s;
+            cursor:pointer;
+            box-sizing:border-box;
+            overflow:hidden;
+            white-space:nowrap;
+            text-overflow:ellipsis;
+        }
+        .nav li.activated
+        {
+            padding-left:30px;
+            color:#2a2a2a;
+        }
+        .nav track
+        {
+            width:5px;
+            height:51px;
+            background:#C0C0C0;
+            position:absolute;
+            margin-left:-5px;
+            top:-1px;
+        }
+        .nav li div
+        {
+            width:40px;
+            height:40px;
+            float:right;
+            margin-top:1px;
+            font-family:"Entypo";
+            text-align:center;
+            font-size:25pt;
+            text-shadow:0px 0px 1px rgba(0,0,0,0.2);
+            line-height:25px;
+        }
+        .nav li#currentName
+        {
+            font-size:20pt;
+            font-family:"open sans";
+            font-weight:700;
+            -webkit-font-smoothing:antialiased;
+            letter-spacing:-0.05em;
+            height:50px;
+            line-height:50px;
+            color:#555;
+        }
+        #useravatar
+        {
+            height:100px;
+            width:100px;
+            margin-top:50px;
+            margin-left:70px;
+            border-radius:50%;
+            overflow:hidden;
+            -webkit-filter:drop-shadow(0px 1px 1px rgba(0,0,0,0.29));
+            -moz-filter:drop-shadow(0px 1px 1px rgba(0,0,0,0.29));
+            -ms-filter:drop-shadow(0px 1px 1px rgba(0,0,0,0.29));
+            filter:drop-shadow(0px 1px 1px rgba(0,0,0,0.29));
+        }
+        #useravatar img
+        {
+            width:100%;
+            height:100%;
+        }
+        .nav li:hover
+        {
+            padding-left:30px;
+            color:#202020;
+        }
+        #framelet
+        {
+            position:relative;
+            width:90%;
+            top:100%;
+            margin-top:0px;
+            min-height:800px;
+            background:rgba(255,255,255,0.28);
+            padding:150px 80px;  
+        }
+        #actions
+        {
+            position:relative;
+            margin-top:70px;
+            margin-left:0px;
+            border:#000;
+            width:250px;
+            height:20px;
+            list-style-type:none;
+            color:rgba(10,127,235,0.8);
+            padding:0px;
+            font-size:15pt;
+        }
+        #actions li
+        {
+            display:inline-block;
+            cursor:pointer;
+            width:40px;
+            height:40px;
+            margin:0px 19px;
+            border-radius:100px;
+            font-size:25pt;
+            line-height:25px;
+            -webkit-transition:all 0.2s;
+        }
+        #actions li:hover
+        {
+            box-shadow:0px 0px 1px rgba(0,0,0,0.20);
+        }
+        #framelet .card
+        {
+            position:absolute;
+            display:block;  
+            z-index:+1;
+            display:none;
+            -webkit-animation:entre 0.5s 1 ease-in-out;
+        }
+        @-webkit-keyframes entre
+        {
+            0%{opacity:0.3;padding-top:15px;}
+            100%{opacity:1;padding-top:0px;}
+        }
+        #framelet .card .header
+        {
+            font-size:40pt;
+            color:#505050;
+            -webkit-font-smoothing:antialiased;
+            font-family:"Open sans",sans-serif;
+            font-weight:300;   
+            padding-left:20px;
+            height:80px;
+            line-height:1;
+            border-bottom:1px solid rgba(0,0,0,0.1);
+            text-shadow:0px 1px 1px rgba(240,240,240,0.5);
+            letter-spacing:-0.05em;
+            -webkit-animation:fold 0.5s 1 ease-out;
+            -webkit-transform-origin:50% 0%;
+        }
+       
+        #framelet .card .content
+        {
+            padding:50px 20px;
+            color:#303030;
+        }
+        ._sprite
+        {
+            font-family:"Entypo";
+            text-align:center;
+        }
+        #tagline
+        {
+            color:rgba(0,0,0,0.75);
+            width:420px;
+            position:absolute;
+            bottom:150px;
+            left:100px;
+            font-size:40pt;
+            letter-spacing:-0.05em;
+            z-index:+26;
+            line-height:53px;
+            text-shadow:0px 0px 1px rgba(0,0,0,0.5);
+        }
+        #tagline span
+        { color:rgba(0,184,255,0.75);
+        padding:50px;
+        display:block;
+        padding:0px 30px;
+        white-space:nowrap;
+        }
+        #primaryBar
+        {
+            position:absolute;
+            right:0px;
+            top:0px;
+            bottom:0px;
+            width:250px;
+        }
+        #secondaryBar
+        {
+            width:600px;
+            position:absolute;
+            left:-100px;
+            top:0px;
+            bottom:0px;
+            background:#f4f5ff;
+            z-index:+5;
+            box-shadow:6px 0px 6px rgba(0,0,0,0.09);
+            overflow:auto;
+        }
+        #secondaryBar>div
+        {
+            position:absolute;
+            width:560px;
+            left:20px;
+            top:70px;
+            bottom:20px;
+        }
+        textarea
+        {
+            background:transparent;
+            border:none;
+            outline:none;
+            font-family:"Open Sans";
+            font-weight:300;
+            box-shadow:0px 4px 0px -2px rgba(0,0,0,0.4);
+            color:#333;
+            resize:none;
+            overflow-y:auto;
+            line-height:18px;
+            -webkit-transition:all 0.3s;
+            transition:all 0.3s;
+            -moz-transition:all 0.3s;
+        }
+        textarea:focus
+        {
+            box-shadow:0px 4px 0px -2px #0A7FEB;
+        }
+        #status
+        {
+            top:20px;
+            width:500px;
+            padding:10px;
+            min-height:42px;
+            height:56px;
+            font-size:10pt;
+            max-height:350px;
+        }
+        #status_sender
+        {
+            color:#0A7FEB;
+            background:transparent;
+            font-size:35pt;
+            line-height:0;
+            width:40px;
+            height:40px;
+            padding-bottom:22px;
+            cursor:pointer;
+            -webkit-border-radius:50%;
+            border-radius:50%;
+            -moz-border-radius:50%;
+            -webkit-transition:all 0.1s;
+            transition:all 0.1s;
+            -moz-transition:all 0.1s;
+            opacity:0.2;
+        }
+        #status_sender:hover
+        {
+            background:rgba(200,200,200,0.1);
+        }
+        #status_sender:active
+        {
+            background:rgba(200,200,200,0.3);
+            color:#333;
+        }
+
+        #shareTools>ul
+        {
+            display:block;
+            clear:both;
+            float:bottom;
+            padding:0px;
+            margin:0px;
+            width:500px;
+            list-style-type:none;
+        }
+        #shareTools>ul>li
+        {   
+            float:left;
+            width:40px;
+            height:40px;
+            margin-right:1px;
+            margin-top:1px;
+            font-size:25pt;
+            line-height:0.7;
+            color:rgba(0,100,255,0.5);
+            cursor:pointer;
+            box-shadow:0px 0px 0px -2px rgba(0,100,255,0.5) inset;
+            -webkit-transition-delay:0.2s;
+            transition-delay:0.2s;
+            -moz-transition-delay:0.2s;
+        }
+        #shareTools>ul>li:hover
+        {
+            box-shadow:0px -4px 0px -2px rgba(0,100,255,0.5) inset;
+        }
+        #shareTools>ul>li:last-child
+        {
+            float:right;
+            box-shadow:none;
+            color:rgba(0,0,0,0.4);
+        }
+        #shareTools ._lag
+        {
+            display:none;
+        }
+        #shareTools>ul>li.activated
+        {
+            box-shadow:0px -4px 0px -2px rgba(0,100,255,0.5) inset;
+            color:#0A7FEB;
+            display:block !important;
+        }
+        #shareTools>ul>li:last-child:hover
+        {
+            color:rgba(0,0,0,0.6);
+        }
+        #more
+        {
+            color:rgba(0,0,0,0.4) !important;
+            box-shadow:none !important;
+            -webkit-transition-delay:none !important;
+        }
+        #more:hover
+        {
+            color:rgba(0,0,0,0.6) !important;
+        }
+        #myInfo
+        {
+            width:560px;
+            padding-bottom:15px;
+            margin-bottom:15px;
+            margin-top:20px;
+            height:80px;
+        }
+        #myInfo .profilePic
+        {
+            -webkit-border-radius:100px;
+            border-radius:100px;
+            -moz-border-radius:100px;
+            border:1px solid rgba(0,0,0,0.065);
+            width:75px;
+            height:75px;
+            display:block;
+            float:left;
+            position:relative;
+            overflow:hidden;
+        }
+        #myInfo .tinymanName
+        {
+            position:left;
+            float:left;
+            display:inline;
+            height:75px;
+            line-height:75px;
+            white-space:nowrap;
+            text-overflow:ellipsis;
+            overflow:hidden;
+            max-width:400px;
+            margin:0px 25px;
+            text-shadow:0px 0px 1px rgba(0,0,0,0.7);
+            font-weight:300;
+            font-family:'Roboto';
+            font-size:15pt;
+        }
+        .profilePic ._innerImg
+        {    
+            position:absolute;
+            top:0;
+            bottom:0;
+            left:0;
+            right:0;
+            background-color:#89BBE9;
+            background-blend-mode:overlay;
+            background-size:cover;
+            background-repeat:no-repeat;
+        }
+        .notifier_wrapper
+        {
+            position:fixed;
+            left:20px;
+            top:20px;
+            z-index:+27;
+        }
+        .notifier_wrapper>ul
+        {
+            position:absolute;
+        }
+        .notifier_wrapper>ul>li
+        {
+            position:relative;
+            display:none;
+            margin:5px 0px;
+            float:top;
+            width:210px;
+            height:80px;
+            box-shadow:0px 0px 1px 1px rgba(0,0,0,0.09),0px 0px 2px 2px rgba(0,0,0,0.14);
+            -webkit-border-radius:5px;
+            border-radius:5px;
+            -moz-border-radius:5px;
+            -ms-border-radius:5px;
+            background:rgba(200,200,200,0.8);
+            -webkit-animation:notify 10s ease-out;
+        }
+        @-webkit-keyframes notify
+        {
+            0%{display:block;}
+            85%{display:block;}
+            90%{opacity:0.7;}
+            99%{opacity:0;}
+            100%{display:none;}
+        }
+        .notifier_wrapper>ul>li>button
+        {
+            color:rgba(90,90,90,0.1);
+            position:absolute;
+            right:0px;
+            top:0px;
+            width:25px;
+            height:25px;
+            background:transparent;
+            font-size:25pt;
+            line-height:0px;
+            padding-bottom:17px;
+        }
+        .notifier_wrapper>ul>li>button:hover
+        {
+            color:#696969;
+            position:absolute;
+            right:0px;
+            top:0px;
+        }
+        #shareTools
+        {
+            z-index:+4;
+            background:#f4f5ff;
+            position:absolute;
+            width:550px;
+        }
+        #WidgetPlayGround
+        {
+            position:absolute;
+            width:550px;
+            height:300px;
+            bottom:0px;
+        }
+        #WidgetPlayGround>.pplWidget
+        {
+            -webkit-transition:none;
+            transition:none;
+            -moz-transition:none;
+            -ms-transition:none;
+            cursor:default;
+        }
+        #WidgetPlayGround>.pplWidget.activated
+        {
+            opacity:0.75;
+            cursor:-webkit-grabbing;
+        }
+        .pplWidget
+        {
+            width:150px;
+            height:50px;
+            background:#555;
+            left:10px;
+            top:10px;
+            display:block;
+            text-align:center;
+            line-height:50px;
+            color:#fff;
+        }
+        .gridCell
+        {
+            width:50px;
+            height:50px;
+            position:relative;
+            display:inline-block;
+            box-sizing:border-box;
+            border-radius:2px;
+            float:left;
+            background:#f4f5ff;
+        }
+        .grid
+        {
+            display:block;
+            position:absolute;
+            top:0px;
+            bottom:0;
+            right:0;
+            left:0;
+            z-index:-1;
+            opacity:0;
+            background:#ccc;
+            -webkit-transition:all 0.2s;
+            transition:all 0.2s;
+            -moz-transition:all 0.2s;
+        }
+        #searchBar
+        {
+            position:absolute;
+            display:none;
+            right:30px;
+            bottom:-25px;
+            width:300px;
+            height:30px;
+            z-index:+30;
+            padding:5px 10px;
+            background:white;
+            box-shadow:0px 2px 2px rgba(0,0,0,0.10),0px 4px 4px rgba(0,0,0,0.17);
+            border-radius:3px;
+            -webkit-animation:fadeIn 0.2s ease-out;
+            -moz-animation:fadeIn 0.2s ease-out;
+            -webkit-transform-origin:0% 0%;
+            -moz-transform-origin:0% 0%;
+            transform-origin:0% 0%;
+        }
+        
+        @-webkit-keyframes fadeIn
+        {
+            0%{-webkit-transform:rotateX(-45deg); opacity:0.4;}
+            100%{-webkit-transform:rotateX(0deg); opacity:1;}
+        }
+        @keyframes fadeIn
+        {
+            0%{-moz-transform:rotateX(-45deg); opacity:0.4;}
+            100%{-moz-transform:rotateX(0deg); opacity:1;}
+        }
+        #searchBar input[type="text"]
+        {
+            position:absolute;
+            width:300px;
+            height:30px;
+            border-radius:inherit;
+            font-family:10.5pt;
+            font-family:sans-serif;
+            -webkit-user-select:text;
+            -moz-user-select:text;
+            -ms-user-select:text;
+            user-select:text;
+        }
+    </style>
+    <body onclick="destruct()">
+    <div class="notifier_wrapper">
+        <ul>
+            <li><button class="_sprite">&#10006;</button></li>
+            <li><button class="_sprite">&#10006;</button></li>
+            <li><button class="_sprite">&#10006;</button></li>
+            <li><button class="_sprite">&#10006;</button></li>
+        </ul>
+    </div>
+    <div class="page_stretch" id="background_cover">
+            <div id="tagline">WHAT ARE YOU <span>#DOING!</span></div>
+            <div id="upperBar">
+            <div id="menuToggle" class="raised _sprite toggle" onclick="toggle_sidebar(this)">&#9776;</div>
+                <span id="Headline">Twitter Inc.</span>
+                <div class="raised _sprite toggle" id="searchToggle" title="Alt+S to Search" onclick="toggle_searchBar()">&#128269;</div>
+                <div id="searchBar"class="flyout" toggle="searchToggle"><input type="text" placeholder="Search"></div>
+            </div>
+            </div>
+        
+        <div id="sidebar" class="flyout" toggle="menuToggle">
+            <div id="secondaryBar">
+                <div>
+                    <div id="MyInfo">
+                        <div class="profilePic"><div class="_innerImg" style="background-image:url('male_avatar.gif');"></div></div>
+                        <div class="tinymanName">Johnny Doe</div>
+                    </div>
+                    <div id="WidgetPlayGround">
+                        <div class="grid" width="550" height="300"></div>
+                        <div class="pplWidget">+Sample Widget</div>
+                        <div class="pplWidget" style="width:100px;top:50px;left:100px;height:100px;">+Drag me</div>
+                    </div>
+                    <div id="shareTools">
+                        <div>
+                            <textarea name="status" id="status" placeholder="Share something"></textarea>
+                            <button id="status_sender" title="Post to your timeline" class="_sprite">&#59230;</button>
+                        </div>
+                        <ul id="shareExt">
+                            <li class="_sprite activated" title="Add text">&#9998;</li>
+                            <li class="_sprite" title="Tag a person">&#128101;</li>
+                            <li class="_sprite" title="Share with location">&#59172;</li>
+                            <li class="_sprite" title="Attach a file">&#128206;</li>
+                            <li class="_sprite _lag" title="Mark an achievment">&#9873;</li>
+                            <li class="_sprite _lag" title="Embed Code">&#59156;</li>
+                            <li class="_sprite" title="More" id="more" onclick="toggle_laggers(this)">&#59230;</li>
+                            <li class="_sprite" title="Privacy Options">&#128274;</li>
+                        </ul>    
+                    </div>
+                    <div>
+                        
+                    </div>
+                </div>
+            </div>
+            <div id="primaryBar" ondblclick="revealSecBar()">
+                <ul id="actions">
+                <li title="Get in touch" class="_sprite">&#9993;</li>
+                <li title="Follow Twitter Inc." class="_sprite">&#59194;</li>
+                <li title="Share with friends" class="_sprite">&#59196;</li>
+            </ul>
+            <div id="useravatar">
+                <img src="twttr.png">
+            </div>
+            <ul class="nav" id="navMenu" callback="showTip">
+            <track></track>
+                <li id="currentName" class="activated" title="Profile">Twitter Inc.</li>
+                <li>Network<div>&#59254;</div></li>
+                <li>Services<div>&infin;</div></li>
+                <li>Workbench<div>&#9874;</div></li>
+                <li>Projects<div>&#128640;</div></li>
+                <li>Developers<div>&#128101;</div></li>
+                <li>Code<div>&#59156;</div></li>
+            </ul>
+            </div>
+        </div>
+        <div id="framelet" name="inlineFrame">
+            <div class="card" name="Twitter Inc." style="display:block;">
+                <div class="header">Twitter Inc.</div>
+                <div class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</div>
+            </div>
+            <div class="card" name="Network">
+                <div class="header">Network</div>
+                <div class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</div>
+            </div>  
+            <div class="card" name="Services">
+                <div class="header">Services</div>
+                <div class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</div>
+            </div>
+            <div class="card" name="Workbench">
+                <div class="header">Workbench</div>
+                <div class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</div>
+            </div>
+            <div class="card" name="Projects">
+                <div class="header">Projects</div>
+                <div class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</div>
+            </div>
+            <div class="card" name="Developers">
+                <div class="header">Developers</div>
+                <div class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</div>
+            </div>
+            <div class="card">
+                <div class="header">Code</div>
+                <div class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</div>
+            </div>
+        </div>
+    </body>
+        <script>
+            var sec=document.getElementById("secondaryBar"),
+            prime=document.getElementById("primaryBar"),
+            stats=sec.getElementsByTagName("textarea")[0],
+            postButt=document.getElementById("status_sender");
+            var sidebar=document.getElementById("sidebar"),
+            searchBar=document.getElementById("searchBar");
+            var i,j,mainframe=document.getElementById("framelet");   
+            var navClass=document.getElementsByClassName("nav");
+            var navMenu=document.getElementById("navMenu");
+            var navList=navMenu.getElementsByTagName("li"),
+            cardList=mainframe.getElementsByClassName("card");
+            var track=navMenu.getElementsByTagName("track")[0],
+            menuToggle=document.getElementById("menuToggle");
+            var bgcover=document.getElementById("background_cover");
+            var init=bgcover.clientHeight;
+            
+            function toggle_searchBar()
+            {
+                var isThere=searchBar.getAttribute("active")==1;
+                if(isThere)
+                {
+                    searchBar.style.display="none";
+                    searchBar.setAttribute("active",0);
+                }
+                else
+                {
+                    searchBar.style.display="block";
+                    window.setTimeout("searchBar.setAttribute('active',1)",100);
+                    searchBar.getElementsByTagName("input")[0].focus();
+                }
+            }
+            
+            function toggle_laggers(x)
+            {
+                var i,list=x.parentNode;
+                var laggers=list.getElementsByClassName("_lag");
+                for(i=0;i<laggers.length;i++)
+                {
+                    var isVisible=laggers[i].style.display=="block";
+                    
+                    if(isVisible)
+                    {   
+                        laggers[i].style.display="none";
+                        x.innerHTML="&#59230;";
+                        x.setAttribute("title","More");
+                    }
+                    else
+                    {
+                        laggers[i].style.display="block";
+                        x.innerHTML="&#59229;";
+                        x.setAttribute("title","Less");
+                    }
+                }
+            }
+            function revealSecBar()
+        {
+            sidebar.style.left="0px";
+            sec.style.left="0px";
+            prime.setAttribute("onclick","revertSideBar()");
+            document.body.style.overflow="hidden";
+            stats.focus();
+        }
+        
+            stats.onkeyup=function()
+            {
+                val=this.value;
+                len=val.length;
+                if(len==0)
+                postButt.style.opacity=0.2;
+                if(len>0)
+                {
+                    postButt.style.opacity=1;
+                }
+            }
+        
+        function revertSideBar()
+        {
+            revert(sidebar);
+            revert(sec);
+            sidebar.style.left="-500px";
+            sidebar.setAttribute("onlcick","");
+        }
+        </script>
+        <script type="text/javascript">
+
+
+        var sideShow=function()
+        {
+            
+        }
+        
+        var sideShut=function()
+        {
+            
+        }
+        var searchShow=function()
+        {
+            searchBar.style.display="block";
+        }
+    
+</script>
+<script>
+    shortcut.add("Space",function(){
+    window.scrollTo(0,init-59);
+            if(sidebar.getAttribute("active")!=1)
+            menuToggle.click();
+            revealSecBar();
+    },
+    {'type':'keydown',
+    'disable_in_input':true,
+    'keycode':32
+    });
+    shortcut.add("esc",function(){
+    if(sidebar.getAttribute("active")==1)
+            menuToggle.click();
+            revert(sec);
+            destruct();
+    },
+    {'type':'keydown',
+    'disable_in_input':true,
+    'keycode':27
+    });
+    shortcut.add("Backspace",function(){
+    if(sidebar.getAttribute("active")==1)
+            menuToggle.click();
+            revert(sec);
+            destruct();
+    },
+    {'type':'keydown',
+    'disable_in_input':true,
+    'keycode':8
+    });
+    shortcut.add("Alt+S",function(){
+        if(searchBar.getAttribute("active")==0)
+    searchToggle.click();
+    },
+    {'type':'keydown',
+    'disable_in_input':true
+    });
+</script>
+<script>
+    var grids=document.getElementsByClassName("grid");
+    for(i=0;i<grids.length;i++)
+    {
+        var ht=Number(grids[i].getAttribute("height")),
+            wt=Number(grids[i].getAttribute("width"));
+        var area=ht*wt;
+        var quantum=area/2500;
+        for(j=0;j<quantum;j++)
+        {var gridCell=document.createElement("DIV");
+        gridCell.classList.add("gridCell");
+        grids[i].appendChild(gridCell);}
+    }
+    var widgets=document.getElementsByClassName("pplWidget");
+    for(i=0;i<widgets.length;i++)
+    {
+        widgets[i].ondrag=function(){
+            this.classList.add("activated");
+            this.parentNode.getElementsByClassName("grid")[0].style.opacity=1;
+        }
+        widgets[i].onmouseup=function(){
+            this.classList.remove("activated");
+            this.parentNode.getElementsByClassName("grid")[0].style.opacity=0;
+        }
+    }
+    mainframe.style.top=init;
+</script>
+<script>
+    var tl=document.getElementsByTagName('textarea');
+    for(i=0;i<tl.length;i++)
+    {tl[i].onblur=function(){
+            var orig=this.style.minHeight;
+            this.style.height=orig;
+            this.style.overflow="hidden";
+        }
+    tl[i].onfocus=function(){
+        this.style.overflow="auto";
+        resize(this);
+        }
+    }
+</script>
+   <script>
+       var resize  = function(t) {
+        t.style.height = 'auto';
+        t.style.height = (t.scrollHeight) + 'px';    
+    }
+   </script>
+    <script>
+            window.onload = function() {
+    var tl = document.getElementsByTagName('textarea');
+    for(i=0;i<tl.length;i++)
+    {var t=tl[i];
+    var offset= !window.opera ? (t.offsetHeight - t.clientHeight) : (t.offsetHeight + parseInt(window.getComputedStyle(t, null).getPropertyValue('border-top-width'))) ;
+ 
+    
+ 
+    t.addEventListener && t.addEventListener('input', function(event) {
+        resize(t);
+    });
+ 
+    t['attachEvent']  && t.attachEvent('onkeyup', function() {
+        resize(t);
+    });
+}
+}
+        </script>
+        <script>
+            
+            function user_about()
+            {        
+                window.scrollTo(0,init-60);
+                scrollPane;
+            }
+        </script>
+        <script>
+            for(i=0;i<navList.length;i++)
+            {
+                navList[i].setAttribute("tip",i);
+                cardList[i].setAttribute("tail",i);
+            }
+        </script>
+        <script>
+        var ToolMenu=document.getElementById("shareExt");
+        var ToolList=ToolMenu.getElementsByTagName("li");
+            for(i=0;i<ToolList.length-2;i++)
+                ToolList[i].onclick=function()
+                {   for(k=0;k<ToolList.length-2;k++)
+                        ToolList[k].classList.remove("activated");
+                    this.classList.add("activated");
+                }       
+        </script>
+        <script>
+            for(i=0;i<navList.length;i++)
+                navList[i].onclick=function()
+                {   for(k=0;k<navList.length;k++)
+                        navList[k].classList.remove("activated");
+                    this.classList.add("activated");
+                    track.style.top=this.offsetTop-1;
+                    track.style.height=this.clientHeight+2;
+                    for(k=0;k<cardList.length;k++)
+                        cardList[k].style.display="none";
+                    document.querySelectorAll("[tail='"+this.getAttribute("tip")+"']")[0].style.display="block";
+                }
+        </script>
+        <script>
+            function revert(x)
+            {
+                x.setAttribute("style","");
+                document.body.style.overflow="scroll";
+            }
+        </script>
+        <script> 
+            function toggle_sidebar(x)
+            {
+            var isHidden=sidebar.offsetLeft==-750;
+            if(isHidden)
+            {
+                sidebar.style.left="-500px";
+                x.innerHTML="&#59233;";
+                sidebar.setAttribute("active",1);
+                mainframe.style.paddingLeft="350px";
+            }
+            else
+            {   
+                sidebar.style.left="-750px";
+                sidebar.setAttribute("active",0);
+                x.innerHTML="&#9776;";
+                mainframe.style.paddingLeft="100px";
+                revert(sec);
+            }
+            
+        }
+        
+    </script>
+    <script>
+        var i,flyouts=document.getElementsByClassName("flyout");
+for(i=0;i<flyouts.length;i++)
+{
+    flyouts[i].setAttribute("keep",0);
+    flyouts[i].setAttribute("onmouseover","keep(this)");
+    myToggler=document.getElementById(flyouts[i].getAttribute("toggle"));
+    flyouts[i].setAttribute("onmouseout","unkeep(this)");
+    flyouts[i].setAttribute("active",0);
+}
+    function keep(x)
+    {
+        x.setAttribute("keep",1);
+    }
+    function unkeep(x)
+    {
+        x.setAttribute("keep",0);
+    }
+    function destruct()
+    {   
+        var j;
+        for(j=0;j<flyouts.length;j++)
+        if(flyouts[j].getAttribute("keep")==0&&flyouts[j].getAttribute("active")==1)
+        {   
+            
+            var toggler=flyouts[j].getAttribute("toggle");
+            document.getElementById(toggler).click();
+        }
+    }
+    </script>
+    <script>
+        var toggle=document.getElementById("menuToggle"),
+        nameplate=document.getElementById("Headline"),
+        upperBar=document.getElementById("upperBar");
+        window.onscroll=scrollPane;
+        function scrollPane()
+        {  
+            var y=window.scrollY;
+            
+            if(y>init-60)
+            {   
+                toggle.style.left="-19px";
+                nameplate.style.marginLeft="60px";
+                upperBar.style.backgroundColor="rgba(81,20,105,0.75)";
+            }
+            else
+            {
+                toggle.style.left="-100px";
+                nameplate.style.marginLeft="20px";
+                upperBar.style.backgroundColor="transparent";
+                if(sidebar.getAttribute("active")==1)
+                toggle.click();
+            }
+            var newht=init-y;
+            if(newht>50)
+            bgcover.style.height=newht;
+            else
+            bgcover.style.height=50;
+        }
+    </script>
+    <script>
+        window.scrollTo(0,300);
+        scrollPane;
+    </script>
+</HTML>
